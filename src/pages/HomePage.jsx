@@ -475,7 +475,7 @@ function HomePage() {
                   onChange={handleConsentChange}
                   required
                 />
-                <span className="mb-0.5">I consent to the terms and conditions.</span>
+                <span className="mb-0.5">I consent to the <span className="text-blue-400 cursor-pointer">Terms and Conditions.</span></span>
               </label>
               {errors.consent && (
                 <p className="text-red-500 text-xs mt-1">{errors.consent}</p>

@@ -6,7 +6,7 @@ import SummeryPage from "./pages/SummeryPage";
 function App() {
   return (
     <Router>
-      <div className="min-h-screen max-w-[393px] mx-auto relative overflow-x-hidden">
+      <div className="min-h-screen max-w-[450px] mx-auto relative overflow-x-hidden">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/calculator/:id" element={<CalculatorPage />} />
