@@ -48,6 +48,29 @@ const channelConfig = {
 
 const defaultFields = ["name", "mobile", "city", "consent"];
 
+const cityOptions = [
+  "Delhi",
+  "Mumbai", 
+  "Bangalore",
+  "Chennai",
+  "Hyderabad",
+  "Kolkata",
+  "Pune",
+  "Ahmedabad",
+  "Jaipur",
+  "Lucknow",
+  "Kanpur",
+  "Nagpur",
+  "Indore",
+  "Thane",
+  "Bhopal",
+  "Visakhapatnam",
+  "Pimpri-Chinchwad",
+  "Patna",
+  "Vadodara",
+  "Ghaziabad"
+];
+
 function HomePage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -105,19 +128,23 @@ function HomePage() {
     setShowConsentPopup(false);
   };
 
+  const handleConsentDecline = () => {
+    setFormData((prev) => ({
+      ...prev,
+      consent: false,
+    }));
+    setShowConsentPopup(false);
+  };
+
   const handleConsentClose = () => {
     setShowConsentPopup(false);
   };
 
   const handleConsentChange = (e) => {
-    if (e.target.checked) {
-      setShowConsentPopup(true);
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        consent: false,
-      }));
-    }
+    setFormData((prev) => ({
+      ...prev,
+      consent: e.target.checked,
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -420,7 +447,7 @@ function HomePage() {
             </div>
           )}
 
-          {fields.includes("city") && isKnownChannel ? (
+          {fields.includes("city") && (
             <div>
               <select
                 name="city"
@@ -432,41 +459,20 @@ function HomePage() {
                 required
               >
                 <option value="">Select City</option>
-                {channelConfig["social_media"].validation.city.list.map(
-                  (city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  )
-                )}
+                {cityOptions.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
               </select>
               {errors.city && (
                 <p className="text-red-500 text-xs mt-1">{errors.city}</p>
               )}
             </div>
-          ) : (
-            fields.includes("city") && (
-              <div>
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  placeholder="City"
-                  className={`w-full px-4 py-[10px] border rounded-[4px] outline-none placeholder:text-[#8E8E8E] text-sm ${
-                    errors.city ? "border-red-500" : "border-[#B9B9B9]"
-                  }`}
-                  required
-                />
-                {errors.city && (
-                  <p className="text-red-500 text-xs mt-1">{errors.city}</p>
-                )}
-              </div>
-            )
           )}
 
           {fields.includes("consent") && (
-            <div>
+            <div className="flex items-center gap-2">
               <label className="text-sm text-gray-700 flex items-center space-x-2">
                 <input
                   type="checkbox"
@@ -475,11 +481,11 @@ function HomePage() {
                   onChange={handleConsentChange}
                   required
                 />
-                <span className="mb-0.5">I consent to the <span className="text-blue-400 cursor-pointer">Terms and Conditions.</span></span>
               </label>
               {errors.consent && (
                 <p className="text-red-500 text-xs mt-1">{errors.consent}</p>
               )}
+              <span className="mb-0.5">I consent to the <span className="text-blue-400 cursor-pointer underline" onClick={handleConsentClick}>Terms and Conditions.</span></span>
             </div>
           )}
 
@@ -503,6 +509,7 @@ function HomePage() {
         isOpen={showConsentPopup}
         onClose={handleConsentClose}
         onAccept={handleConsentAccept}
+        onDecline={handleConsentDecline}
       />
     </div>
   );

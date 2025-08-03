@@ -8,7 +8,7 @@ import React, { useEffect } from 'react';
  * @param {Function} props.onAccept - Function to accept consent
  * @returns {JSX.Element} Consent popup component
  */
-const ConsentPopup = ({ isOpen, onClose, onAccept }) => {
+const ConsentPopup = ({ isOpen, onClose, onAccept, onDecline }) => {
   // Prevent background scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
