@@ -553,7 +553,7 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
-      <div>
+      <div className="bg-white">
         <img src="/images/Hero2.png" alt="" />
       </div>
 
