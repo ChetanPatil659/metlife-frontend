@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import {
   formatIndianCurrency,
   formatYearlyInvestment,
 } from "../utils/formatters";
-import { FullScreenLoader } from "../components/LoadingSpinner";
+import { FullScreenLoader, InlineSpinner } from "../components/LoadingSpinner";
 
 const recommendationImages = [
   {
@@ -119,6 +119,18 @@ function SummeryPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="relative h-[44px] w-full mt-5 max-w-[250px] mx-auto">
+        <Link
+          disabled={loading}
+          to={'https://www.pnbmetlife.com/'}
+          target="_blank"
+          className={`absolute text-center cursor-pointer z-10 top-0 right-1 left-0 bottom-1 border-[2px] border-[#FFFFFF] bg-[#F67F36] text-[#FFFFFF] font-[900] text-[20px] rounded-[4px] outline-none`}
+        >
+          Know More
+        </Link>
+        <div className="absolute top-1 right-0 left-1 bottom-0 bg-[#A4CE4E] rounded-[4px]" />
       </div>
 
       {/* Bottom Illustration Section */}
