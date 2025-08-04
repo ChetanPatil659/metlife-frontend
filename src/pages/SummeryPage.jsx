@@ -87,10 +87,10 @@ function SummeryPage() {
         <div className="w-full">
           {/* Personalized Message */}
           <div className="text-center">
-            <h1 className="text-[29px] font-[600] leading-[40px] text-black flex flex-col items-center">
+            <h1 className="text-[26px] font-[600] leading-[40px] text-black flex flex-col items-center">
               Dear {data?.name},
               <br />
-              <span className="text-[18px] font-[400] text-black leading-[20px]">
+              <span className="text-base font-[400] text-black leading-[20px]">
                 Your goal to become <br /> Financially Independent and Retire
                 Early <br />
                 (FIRE) is achievable with a corpus of
@@ -120,7 +120,7 @@ function SummeryPage() {
 
           {/* Call to Action */}
           <div className="text-center mt-4">
-            <p className="text-[18px] font-[400] text-black leading-[20px]">
+            <p className="text-base font-[400] text-black leading-[20px]">
               PNB MetLife can help you build the corpus <br /> start today and
               move closer to your dream.
             </p>
@@ -133,11 +133,11 @@ function SummeryPage() {
 
           {/* Suggested Plans Section */}
           <div className="space-y-4">
-            <h3 className="text-[19px] font-[400] text-center text-black">
+            <h3 className="text-base font-[400] text-center text-black">
               Suggested Life Insurance plans for you
             </h3>
 
-            <div className="flex gap-2 px-8 items-center justify-center">
+            <div className="flex gap-4 px-8 items-center justify-center">
               {recommendation?.map((item, index) => (
                 <div key={index} className="mx-auto w-[150px]">
                   <img
