@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Toggle from "../components/Toggle";
 import axios from "axios";
@@ -49,26 +49,163 @@ const channelConfig = {
 const defaultFields = ["name", "mobile", "city", "consent"];
 
 const cityOptions = [
+  "Durgapur",
+  "Asansol",
+  "Howrah",
+  "Berhampore",
+  "New Town",
+  "North Dumdum",
+  "Kolkata",
+  "Kharagpur",
+  "Haora",
+  "Jamshedpur",
+  "Ghaziabad",
+  "Noida",
+  "Sahibzada Ajit Singh Nagar",
+  "Baddi",
+  "Panchkula",
+  "Chandigarh",
   "Delhi",
-  "Mumbai", 
-  "Bangalore",
+  "New Delhi",
+  "Rayadurgam",
+  "Secunderabad",
   "Chennai",
   "Hyderabad",
-  "Kolkata",
-  "Pune",
-  "Ahmedabad",
-  "Jaipur",
-  "Lucknow",
-  "Kanpur",
-  "Nagpur",
-  "Indore",
-  "Thane",
-  "Bhopal",
+  "Coimbatore",
+  "Tiruchirappalli",
   "Visakhapatnam",
+  "Erode",
+  "Madurai",
+  "Guntur",
+  "Trichy",
+  "Eluru",
+  "Vijayawada",
+  "Rajahmundry",
+  "Ibrahimpatnam",
+  "Telangana",
+  "Bangalore",
+  "Mangalore",
+  "Mysore",
+  "Hubli",
   "Pimpri-Chinchwad",
+  "Nashik",
+  "Nagpur",
+  "Jabalpur",
+  "Mumbai",
+  "Pune",
+  "Kochi",
+  "Warangal",
+  "Kannur",
+  "Kottayam",
+  "Thrissur",
+  "Kozhikode",
+  "Thiruvananthapuram",
+  "Kollam",
+  "Alappuzha",
+  "Aluva",
+  "Kasargod",
+  "Thiruvalla",
+  "Palakkad",
+  "Mavelikkara",
+  "Kannamangalam Alappuzha District",
+  "Alleppey",
+  "Krishna",
+  "Faridabad",
+  "Gurgaon",
+  "Gurugram",
+  "Bengaluru",
+  "Hubballi",
+  "Mysuru",
+  "Kakinada",
+  "Thane",
+  "Navi Mumbai",
+  "Ambala",
+  "Hamirpur",
+  "Trivandrum",
+  "Ahmedabad",
+  "Indore",
+  "Bhopal",
+  "Rajkot",
+  "Panaji",
+  "Kolhapur",
+  "Gwalior",
+  "Baroda",
+  "Gandhinagar",
+  "Surat",
+  "Panjim",
+  "Gujarat",
+  "Madhya Pradesh",
   "Patna",
-  "Vadodara",
-  "Ghaziabad"
+  "Bihar",
+  "Bhubaneshwar",
+  "East Singhbhum",
+  "Ranchi",
+  "Contai",
+  "Raipur",
+  "Guwahati",
+  "Gaya",
+  "Deoghar",
+  "Siliguri",
+  "Jorhat",
+  "Sambalpur",
+  "Dhekorgorha",
+  "Chapra",
+  "Bhubaneswar",
+  "Odisha",
+  "Dahali",
+  "Silchar",
+  "Manipur",
+  "Agartala",
+  "Garacharma",
+  "Bakultala",
+  "Kamorta",
+  "Baharampur",
+  "Cuttack",
+  "Rourkela",
+  "Sonipat",
+  "Prayagraj",
+  "Panipat",
+  "Bareilly",
+  "Hisar",
+  "Lucknow",
+  "Karnal",
+  "Gorakhpur",
+  "AYODHAYA",
+  "Varanasi",
+  "Uttar Pradesh",
+  "Kota",
+  "Jaipur",
+  "Agra",
+  "Udaipur",
+  "Jodhpur",
+  "Alwar",
+  "Banswara",
+  "Rohtak",
+  "Amritsar",
+  "Anantnag",
+  "Ananthnag",
+  "Dehradun",
+  "Himachal Pradesh",
+  "Hoshiarpur",
+  "Jalandhar",
+  "Jammu",
+  "Kanpur",
+  "Kanpur Dehat",
+  "Kathua",
+  "Sopore",
+  "Srinagar",
+  "Shimla",
+  "Saharanpur",
+  "Kailashpur",
+  "Bungal",
+  "Meerut",
+  "Ludhiana",
+  "Pathankot",
+  "Moradabad",
+  "Aligarh",
+  "Mathura",
+  "Muzaffarnagar",
+  "Allahabad",
 ];
 
 function HomePage() {
@@ -80,12 +217,32 @@ function HomePage() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [showConsentPopup, setShowConsentPopup] = useState(false);
+  const [showCityDropdown, setShowCityDropdown] = useState(false);
+  const [citySearchTerm, setCitySearchTerm] = useState("");
+  const [dropdownPosition, setDropdownPosition] = useState("below");
+  const cityDropdownRef = useRef(null);
 
   useEffect(() => {
     if (refParam) {
       setReferral(refParam);
     }
   }, [refParam]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        cityDropdownRef.current &&
+        !cityDropdownRef.current.contains(event.target)
+      ) {
+        setShowCityDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -113,6 +270,35 @@ function HomePage() {
         ...prev,
         [name]: null,
       }));
+    }
+
+    // Real-time validation for business code and employee code
+    if (name === "businessCode" && value.length > 0) {
+      if (value.length !== 8) {
+        setErrors((prev) => ({
+          ...prev,
+          businessCode: "Business Code must be 8 digits",
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          businessCode: null,
+        }));
+      }
+    }
+
+    if (name === "employeeCode" && value.length > 0) {
+      if (value.length !== 7) {
+        setErrors((prev) => ({
+          ...prev,
+          employeeCode: "Employee Code must be 7 digits",
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          employeeCode: null,
+        }));
+      }
     }
   };
 
@@ -146,6 +332,53 @@ function HomePage() {
       consent: e.target.checked,
     }));
   };
+
+  const handleCityChange = (event) => {
+    const { value } = event.target;
+    setCitySearchTerm(value);
+    setFormData((prevData) => ({
+      ...prevData,
+      city: value,
+    }));
+    setShowCityDropdown(true);
+
+    // Clear error for city when user starts typing
+    if (errors.city) {
+      setErrors((prev) => ({
+        ...prev,
+        city: null,
+      }));
+    }
+  };
+
+  const checkDropdownPosition = () => {
+    if (cityDropdownRef.current) {
+      const rect = cityDropdownRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const spaceBelow = windowHeight - rect.bottom;
+      const spaceAbove = rect.top;
+
+      // If there's less than 240px below (max height of dropdown), show above
+      if (spaceBelow < 240 && spaceAbove > 240) {
+        setDropdownPosition("above");
+      } else {
+        setDropdownPosition("below");
+      }
+    }
+  };
+
+  const handleCitySelect = (city) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      city: city,
+    }));
+    setCitySearchTerm(city);
+    setShowCityDropdown(false);
+  };
+
+  const filteredCities = cityOptions.filter((city) =>
+    city.toLowerCase().includes(citySearchTerm.toLowerCase())
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -448,25 +681,43 @@ function HomePage() {
           )}
 
           {fields.includes("city") && (
-            <div>
-              <select
+            <div ref={cityDropdownRef} className="relative">
+              <input
+                type="text"
                 name="city"
-                value={formData.city}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-[10px] border rounded-[4px] text-[#8E8E8E] text-sm ${
+                value={citySearchTerm}
+                onChange={handleCityChange}
+                onFocus={() => {
+                  setShowCityDropdown(true);
+                  setTimeout(checkDropdownPosition, 0);
+                }}
+                placeholder="Select City"
+                className={`w-full px-4 py-[10px] border rounded-[4px] outline-none placeholder:text-[#8E8E8E] text-sm ${
                   errors.city ? "border-red-500" : "border-[#B9B9B9]"
                 }`}
                 required
-              >
-                <option value="">Select City</option>
-                {cityOptions.map((city) => (
-                  <option key={city} value={city}>
-                    {city}
-                  </option>
-                ))}
-              </select>
+              />
               {errors.city && (
                 <p className="text-red-500 text-xs mt-1">{errors.city}</p>
+              )}
+              {showCityDropdown && filteredCities.length > 0 && (
+                <div
+                  className={`absolute z-50 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto ${
+                    dropdownPosition === "above"
+                      ? "bottom-full mb-1"
+                      : "top-full mt-1"
+                  }`}
+                >
+                  {filteredCities.map((city) => (
+                    <div
+                      key={city}
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleCitySelect(city)}
+                    >
+                      {city}
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           )}
@@ -485,7 +736,15 @@ function HomePage() {
               {errors.consent && (
                 <p className="text-red-500 text-xs mt-1">{errors.consent}</p>
               )}
-              <span className="mb-0.5">I consent to the <span className="text-blue-400 cursor-pointer underline" onClick={handleConsentClick}>Terms and Conditions.</span></span>
+              <span className="mb-0.5">
+                I consent to the{" "}
+                <span
+                  className="text-blue-400 cursor-pointer underline"
+                  onClick={handleConsentClick}
+                >
+                  Terms and Conditions.
+                </span>
+              </span>
             </div>
           )}
 
