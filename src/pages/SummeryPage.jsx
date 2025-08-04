@@ -32,6 +32,7 @@ function SummeryPage() {
   const [data, setData] = useState(null);
   const [recommendation, setRecommendation] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [adf, setAdf] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -45,6 +46,23 @@ function SummeryPage() {
       );
       setData(response.data.user);
       setRecommendation(response.data.recommendedPlan);
+      switch (response?.data?.user?.channel) {
+        case "agency":
+          setAdf(445);
+          break;
+        case "pnb":
+        case "social_media":
+        case "psf":
+          setAdf(444);
+          break;
+        case "jkb":
+        case "kbl":
+          setAdf(443);
+          break;
+        default:
+          setAdf(444);
+          break;
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -124,7 +142,7 @@ function SummeryPage() {
       <div className="relative h-[44px] w-full mt-5 max-w-[250px] mx-auto">
         <Link
           disabled={loading}
-          to={'https://www.pnbmetlife.com/'}
+          to={"https://www.pnbmetlife.com/"}
           target="_blank"
           className={`absolute text-center cursor-pointer z-10 top-0 right-1 left-0 bottom-1 border-[2px] border-[#FFFFFF] bg-[#F67F36] text-[#FFFFFF] font-[900] text-[20px] rounded-[4px] outline-none`}
         >
@@ -182,7 +200,7 @@ function SummeryPage() {
         Number: 1-800-425-6969 Website: www.pnbmetlife.com Email:
         indiaservice@pnbmetlife.co.in Postal Address: 1st Floor, Techniplex -1,
         Techniplex Complex, Opp Veer Savarkar Flyover, Goregaon (West),
-        Mumbai-400062, Maharashtra. Document Reference: AD-F/2025-26/444
+        Mumbai-400062, Maharashtra. Document Reference: AD-F/2025-26/{adf}
       </div>
 
       {/* Warning Section */}

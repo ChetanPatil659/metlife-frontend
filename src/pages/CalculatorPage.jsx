@@ -65,7 +65,7 @@ function CalculatorPage() {
         <div className="flex px-[44px] py-[10px] -mt-[24px] items-center gap-2 justify-between">
           <div
             className="cursor-pointer h-[30px] pt-0.5 w-[30px] flex items-center justify-center"
-            onClick={() => navigate("/")}
+            onClick={() => navigate(-1)}
           >
             <svg
               width="17"

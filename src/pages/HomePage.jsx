@@ -382,7 +382,6 @@ function HomePage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const config = isKnownChannel ? channelConfig[referral] : null;
 
     // Clear previous errors
@@ -393,10 +392,11 @@ function HomePage() {
     let hasErrors = false;
 
     for (const field of fields) {
+      console.log(formData[field])
       if (
-        formData[field] === "" ||
+        // formData[field] === "" ||
         formData[field] === undefined ||
-        (field === "consent" && !formData[field])
+        (field === "consent" && !formData[field] || (field === "buisnessCode" && formData[field] === "" && field === "employeeCode" && formData[field] === ""))
       ) {
         newErrors[field] = `${
           field.charAt(0).toUpperCase() + field.slice(1)
@@ -404,6 +404,8 @@ function HomePage() {
         hasErrors = true;
       }
     }
+
+    console.log(hasErrors)
 
     if (hasErrors) {
       setErrors(newErrors);
