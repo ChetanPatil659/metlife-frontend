@@ -13,7 +13,7 @@ const recommendationImages = [
     image: "/images/recommendation/CENTURY.png",
   },
   {
-    name: "FUTURE",
+    name: "MGFP",
     image: "/images/recommendation/FUTURE.png",
   },
   {
@@ -101,7 +101,7 @@ function SummeryPage() {
           <div className="text-center -mt-2">
             <div className="text-[86px] font-[900] text-[#1362A4] flex items-center justify-center gap-1">
               {formatIndianCurrency(data?.retirementCorpus)}
-              <svg width="40" height="100" viewBox="0 0 20 20" fill="currentColor">
+              <svg width="30" className="-mt-2" height="80" viewBox="0 0 20 20" fill="currentColor">
                 <text x="0" y="15" fontSize="30" fontFamily="serif">
                   ”
                 </text>
