@@ -11,23 +11,24 @@ const channelConfig = {
     validation: {
       businessCode: { length: 8 },
       employeeCode: { length: 7 },
+      mobile: { length: 10 },
     },
   },
   pnb: {
     fields: ["name", "mobile", "employeeCode", "consent"],
-    validation: { employeeCode: { length: 7 } },
+    validation: { employeeCode: { length: 7 }, mobile: { length: 10 } },
   },
   jkb: {
     fields: ["name", "mobile", "employeeCode", "consent"],
-    validation: { employeeCode: { length: 7 } },
+    validation: { employeeCode: { length: 7 }, mobile: { length: 10 } },
   },
   kbl: {
     fields: ["name", "mobile", "employeeCode", "consent"],
-    validation: { employeeCode: { length: 7 } },
+    validation: { employeeCode: { length: 7 }, mobile: { length: 10 } },
   },
   psf: {
     fields: ["name", "mobile", "employeeCode", "consent"],
-    validation: { employeeCode: { length: 7 } },
+    validation: { employeeCode: { length: 7 }, mobile: { length: 10 } },
   },
   social_media: {
     fields: ["name", "mobile", "city", "consent"],
@@ -42,6 +43,7 @@ const channelConfig = {
           "consent",
         ],
       },
+      mobile: { length: 10 },
     },
   },
 };
@@ -300,6 +302,20 @@ function HomePage() {
         }));
       }
     }
+
+    if (name === "mobile" && value.length > 0) {
+      if (value.length !== 10) {
+        setErrors((prev) => ({
+          ...prev,
+          mobile: "Mobile must be 10 digits",
+        }));
+      } else {
+        setErrors((prev) => ({
+          ...prev,
+          mobile: null,
+        }));
+      }
+    }
   };
 
   const handleConsentClick = () => {
@@ -452,6 +468,16 @@ function HomePage() {
         newErrors.employeeCode = "Employee Code must be 7 digits";
         hasErrors = true;
       }
+
+      if (
+        selectedType === "mobile" &&
+        cleanFormData.mobile &&
+        cleanFormData.mobile.length !==
+          config.validation.mobile.length
+      ) {
+        newErrors.mobile = "Mobile must be 10 digits";
+        hasErrors = true;
+      }
     } else {
       // Default validation
       if (
@@ -562,18 +588,21 @@ function HomePage() {
           {fields.includes("mobile") && (
             <div>
               <input
-                type="tel"
+                type="number"
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleInputChange}
                 placeholder="Mobile Number"
+                maxLength={10}
                 className={`w-full px-4 py-[10px] border rounded-[4px] outline-none placeholder:text-[#8E8E8E] text-sm ${
                   errors.mobile ? "border-red-500" : "border-[#B9B9B9]"
                 }`}
                 required
               />
               {errors.mobile && (
-                <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.mobile}
+                </p>
               )}
             </div>
           )}

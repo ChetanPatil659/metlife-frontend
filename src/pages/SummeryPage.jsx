@@ -105,7 +105,7 @@ function SummeryPage() {
           {/* Call to Action */}
           <div className="text-center mt-4">
             <p className="text-[17px] font-[400] text-black">
-              PNB MetLife can help you build the corpus – start today and move
+              PNB MetLife can help you build the corpus start today and move
               closer to your dream.
             </p>
           </div>
@@ -117,13 +117,13 @@ function SummeryPage() {
 
           {/* Suggested Plans Section */}
           <div className="space-y-5">
-            <h3 className="text-[20px] font-[400] text-black text-left">
-              Suggested plans for you
+            <h3 className="text-base font-[400] text-center text-black">
+              Suggested Life Insurance plans for you
             </h3>
 
-            <div className="grid grid-cols-2 gap-4 items-center">
+            <div className="flex gap-2 items-center justify-center">
               {recommendation?.map((item, index) => (
-                <div key={index}>
+                <div key={index} className="mx-auto w-[150px]">
                   <img
                     src={
                       recommendationImages.find((image) => image.name == item)
