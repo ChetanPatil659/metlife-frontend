@@ -86,10 +86,12 @@ function SummeryPage() {
         <div className="w-full">
           {/* Personalized Message */}
           <div className="text-center">
-            <h1 className="text-[29px] font-[900] text-black flex flex-col items-center">
+            <h1 className="text-[29px] font-[600] leading-[40px] text-black flex flex-col items-center">
               Dear {data?.name},
-              <span className="text-[18px] font-light text-black leading-[30px]">
-                Your goal to become Financially Independent and Retire Early
+              <br />
+              <span className="text-[18px] font-[400] text-black leading-[20px]">
+                Your goal to become <br /> Financially Independent and Retire
+                Early <br />
                 (FIRE) is achievable with a corpus of
               </span>
             </h1>
@@ -104,24 +106,24 @@ function SummeryPage() {
 
           {/* Call to Action */}
           <div className="text-center mt-4">
-            <p className="text-[17px] font-[400] text-black">
-              PNB MetLife can help you build the corpus start today and move
-              closer to your dream.
+            <p className="text-[18px] font-[400] text-black leading-[20px]">
+              PNB MetLife can help you build the corpus <br /> start today and
+              move closer to your dream.
             </p>
           </div>
 
           {/* Separator */}
-          <div className="flex justify-center my-5">
+          <div className="flex justify-center my-5 mt-3">
             <div className="w-[263px] h-px bg-[#1362A4]"></div>
           </div>
 
           {/* Suggested Plans Section */}
-          <div className="space-y-5">
-            <h3 className="text-base font-[400] text-center text-black">
+          <div className="space-y-4">
+            <h3 className="text-[19px] font-[400] text-center text-black">
               Suggested Life Insurance plans for you
             </h3>
 
-            <div className="flex gap-2 items-center justify-center">
+            <div className="flex gap-2 px-8 items-center justify-center">
               {recommendation?.map((item, index) => (
                 <div key={index} className="mx-auto w-[150px]">
                   <img
@@ -152,12 +154,12 @@ function SummeryPage() {
       </div>
 
       {/* Bottom Illustration Section */}
-      <div className="-mt-10">
+      <div className="-mt-20">
         <img src="/images/Hero.png" style={{ width: "100%" }} alt="" />
       </div>
 
       {/* Disclaimer Section */}
-      <div className="px-[23px] py-4 text-[8px] text-gray-600">
+      <div className="px-[23px] py-2 pt-4 text-[8px] text-gray-600">
         *The Linked Insurance Product does not offer any liquidity during the
         first five years of the contract. The policyholder will not be able to
         surrender or withdraw the monies invested in linked insurance products
@@ -204,12 +206,12 @@ function SummeryPage() {
       </div>
 
       {/* Warning Section */}
-      <div className="mx-6 mb-3 p-3 border border-black">
-        <div className="text-center">
-          <h3 className="text-[10px] font-bold text-gray-600 mb-2">
+      <div className="mx-6 mb-3 p-0.5 px-1 border border-zinc-500">
+        <div className="text-start">
+          <h3 className="text-[8px] font-bold text-gray-600">
             BEWARE OF SPURIOUS PHONE CALLS AND FICTITOUS/FRAUDULENT OFFERS!
           </h3>
-          <p className="text-[8px] text-black">
+          <p className="text-[8px] text-zinc-700 leading-[10px]">
             IRDAI or its officials do not engage in activities like selling
             insurance policies, announcing bonuses, or investment of premiums.
             The public is requested to lodge a police complaint if they receive
