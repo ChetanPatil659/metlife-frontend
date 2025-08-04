@@ -173,7 +173,7 @@ function SummeryPage() {
       </div>
 
       {/* Disclaimer Section */}
-      <div className="px-[23px] py-2 pt-4 text-[8px] text-gray-600">
+      <div className="px-[23px] py-2 pt-4 text-[7px] text-gray-600">
         *{DISCLAIMER[data?.channel]}
       </div>
 
