@@ -6,6 +6,7 @@ import {
   formatYearlyInvestment,
 } from "../utils/formatters";
 import { FullScreenLoader, InlineSpinner } from "../components/LoadingSpinner";
+import { DISCLAIMER } from "../utils/constant";
 
 const recommendationImages = [
   {
@@ -173,49 +174,7 @@ function SummeryPage() {
 
       {/* Disclaimer Section */}
       <div className="px-[23px] py-2 pt-4 text-[8px] text-gray-600">
-        *The Linked Insurance Product does not offer any liquidity during the
-        first five years of the contract. The policyholder will not be able to
-        surrender or withdraw the monies invested in linked insurance products
-        completely or partially till the end of the fifth year. PNB MetLife
-        Hybrid is a combination of two individual products: (1) PNB MetLife
-        Grand Assured Income Plan - An Individual, Non-Linked,
-        Non-Participating, Deferred Annuity Product (UIN: 117N134V06) and (2)
-        PNB MetLife Smart Platinum Plus - An Individual, Unit Linked,
-        Non-Participating, Life Insurance Plan (UIN: 117L125V06). These products
-        can also be purchased individually. Customer is advised to refer to the
-        detailed sales brochure of respective individual products before
-        concluding a sale. PNB MetLife Grand Assured Income Plan (UIN:
-        117N134V06). Product recommendations are part of our campaign based on
-        assumed 6% inflation and average life expectancy of 75 years. These are
-        for illustration purposes and financial awareness only and should not be
-        construed as investment advice or substitute for financial planning. PNB
-        MetLife India Insurance does not guarantee any returns under any of its
-        products. For detailed information on products and benefits, please
-        visit www.pnbmetlife.com i.Linked insurance products differ from
-        traditional insurance products and are subject to risk factors. ii.
-        Premiums in linked insurance policies are subject to investment risks
-        associated with capital markets and publicly available indices. The Net
-        Asset Values (NAVs) of units may fluctuate based on fund performance and
-        market factors, and the insured is responsible for their decisions. iii.
-        "PNB MetLife India Insurance Company Ltd" is the name of the Life
-        Insurance Company, and "PNB MetLife Smart Platinum Plus Plan" is the
-        name of the linked insurance contract. These names do not indicate the
-        quality, future prospects, or returns of the contract. iv. Customers
-        should be aware of associated risks and applicable charges, obtainable
-        from their insurance agent, intermediary, or the policy document. v. The
-        names of the various funds offered under the contract do not indicate
-        the quality, future prospects, or returns of these plans. Past
-        performance of the funds is not indicative of future performance.
-        Registered Office Address: Unit No. 701, 702 & 703, 7th Floor, West
-        Wing, Raheja Towers, 26/27 MG Road, Bangalore-560001, Karnataka. IRDAI
-        Registration Number: 117 CIN No: U66010KA2001PLC028883 The marks "PNB"
-        and "MetLife" are registered trademarks of Punjab National Bank and
-        Metropolitan Life Insurance Company, respectively. PNB MetLife India
-        Insurance Company Limited is a licensed user of these marks. Toll-free
-        Number: 1-800-425-6969 Website: www.pnbmetlife.com Email:
-        indiaservice@pnbmetlife.co.in Postal Address: 1st Floor, Techniplex -1,
-        Techniplex Complex, Opp Veer Savarkar Flyover, Goregaon (West),
-        Mumbai-400062, Maharashtra. Document Reference: AD-F/2025-26/{adf}
+        *{DISCLAIMER[data?.channel]}
       </div>
 
       {/* Warning Section */}
