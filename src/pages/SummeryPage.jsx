@@ -180,7 +180,7 @@ function SummeryPage() {
       {/* Warning Section */}
       <div className="mx-6 mb-3 p-0.5 px-1 border border-zinc-500">
         <div className="text-start">
-          <h3 className="text-[8px] font-bold text-gray-600">
+          <h3 className="text-[8px] text-gray-600">
             BEWARE OF SPURIOUS PHONE CALLS AND FICTITOUS/FRAUDULENT OFFERS!
           </h3>
           <p className="text-[8px] text-zinc-700 leading-[10px]">
