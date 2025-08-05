@@ -99,21 +99,13 @@ function SummeryPage() {
           </div>
 
           {/* Financial Goal Figure */}
-          <div className="text-center mt-1">
+          <div className="text-center mt-2">
             <div className="font-[900] text-[#1362A4] gap-1">
-              <h1 className="flex whitespace-nowrap md:text-7xl text-6xl items-center justify-center">
+              <h1 className="md:text-7xl text-6xl">
                 {formatIndianCurrency(data?.retirementCorpus)}
-                <svg
-                  width="30"
-                  className="-mt-2"
-                  height="80"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <text x="0" y="15" fontSize="30" fontFamily="serif">
-                    ”
-                  </text>
-                </svg>
+                <span className="font-mono">
+                  "
+                </span>
               </h1>
             </div>
           </div>
